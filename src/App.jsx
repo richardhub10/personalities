@@ -1,4 +1,20 @@
 import React, { useState } from 'react';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const personalities = [
 	{
@@ -119,80 +135,99 @@ function App() {
 	};
 
 	return (
-		<div className="page-root">
-			<header className="page-header">
-				<div>
-					<h1 className="header-title">Richard Ken Magat - BSIT-3A</h1>
-					<p className="header-subtitle">{person.subtitle}</p>
-				</div>
-			</header>
+		<Container maxWidth="md" sx={{ py: 4 }}>
+			<Box sx={{ mb: 3 }}>
+				<Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
+					FIFA Club World Cup Champions
+				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
+					<Paper elevation={3} sx={{ p: { xs: 2, sm: 2.5 }, borderRadius: 3, width: { xs: '95%', sm: '72%', md: '64%' }, bgcolor: 'rgba(255,255,255,0.96)' }}>
+						<Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, alignItems: 'center', justifyContent: 'space-between' }}>
+							<Box>
+								<Typography variant="overline" color="text.secondary" sx={{ display: 'block' }}>Full Name</Typography>
+								<Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'text.primary' }}>Richard Ken Magat</Typography>
+							</Box>
 
-			<main className="page-main">
-				<div className="card-column">
-					<section className="card">
-						<img
-							src={person.photoUrl}
-							alt={person.name}
-							className="card-photo"
-						/>
-						<h2 className="card-name">
-							{person.name} ({person.year})
-						</h2>
-						<p className="card-counter">
-							{index + 1} of {personalities.length}
-						</p>
+							<Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', sm: 'block' } }} />
 
-						<div className="slide-indicators" aria-hidden={false}>
-							{personalities.map((_, i) => (
-								<button
-									key={i}
-									className={i === index ? 'dot active' : 'dot'}
-									onClick={() => setIndex(i)}
-									aria-label={`Go to slide ${i + 1}`}
-								/>
-							))}
-						</div>
+							<Box sx={{ textAlign: 'center' }}>
+								<Typography variant="overline" color="text.secondary" sx={{ display: 'block' }}>Subject</Typography>
+								<Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'text.primary' }}>C-PEITEL3</Typography>
+							</Box>
 
-						<button
-							type="button"
-							className="card-chevron"
-							onClick={() => setExpanded((prev) => !prev)}
-						>
-							<span
-								className={
-									expanded ? 'chevron chevron-down' : 'chevron chevron-up'
-								}
-								aria-hidden="true"
+							<Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', sm: 'block' } }} />
+
+							<Box sx={{ textAlign: { xs: 'left', sm: 'right' } }}>
+								<Typography variant="overline" color="text.secondary" sx={{ display: 'block' }}>Section</Typography>
+								<Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'text.primary' }}>BSIT-3A</Typography>
+							</Box>
+						</Box>
+					</Paper>
+				</Box>
+			</Box>
+
+			<Grid container justifyContent="center">
+				<Grid item xs={12} sm={10}>
+					<Card sx={{ display: 'flex', flexDirection: 'column', borderRadius: 3, boxShadow: 8, overflow: 'hidden' }}>
+						<Box sx={{ position: 'relative', bgcolor: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+							<CardMedia
+								component="img"
+								image={person.photoUrl}
+								alt={person.name}
+								sx={{ width: '100%', height: 'auto', maxHeight: { xs: 320, sm: 520 }, objectFit: 'contain', backgroundColor: '#f8fafc' }}
 							/>
-							<span className="sr-only">
-								{expanded ? 'Hide description' : 'Show description'}
-							</span>
-						</button>
 
-						<div
-							className={
-								expanded
-									? 'card-description expanded'
-									: 'card-description collapsed'
-							}
-						>
-							<p>{person.description}</p>
-						</div>
-					</section>
+							<Box sx={{
+								position: 'absolute',
+								left: 0,
+								right: 0,
+								bottom: 0,
+								px: 2,
+								py: 1.5,
+								background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)',
+								color: 'common.white'
+							}}>
+								<Typography variant="h6" sx={{ fontWeight: 700 }}>{person.name}</Typography>
+								<Typography variant="caption" sx={{ opacity: 0.9 }}>{person.year} • {person.title}</Typography>
+							</Box>
+						</Box>
 
-					<div className="card-buttons card-buttons-bottom">
-						<button className="nav-button" onClick={handleBack}>
-							BACK
-						</button>
-						<button className="nav-button" onClick={handleNext}>
-							NEXT
-						</button>
-					</div>
-				</div>
+						<CardContent sx={{ pt: 2 }}>
+							<Typography variant="subtitle2" color="text.secondary" sx={{ mt: 0.5 }}>{person.title}</Typography>
+							<Typography variant="caption" display="block" sx={{ mt: 1 }}>{index + 1} of {personalities.length}</Typography>
+							<Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>{person.subtitle}</Typography>
+						</CardContent>
 
-				<div className="page-right-space" />
-			</main>
-		</div>
+						<CardActions sx={{ justifyContent: 'space-between', px: 3, py: 2 }}>
+							<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+								<Button variant="outlined" color="primary" startIcon={<ArrowBackIosNewIcon />} onClick={handleBack}>
+									Prev
+								</Button>
+								<Button variant="outlined" color="primary" endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
+									Next
+								</Button>
+							</Box>
+
+							<Button
+								size="small"
+								variant="contained"
+								color="primary"
+								endIcon={<ExpandMoreIcon />}
+								onClick={() => setExpanded((prev) => !prev)}
+							>
+								{expanded ? 'Read Less' : 'Read More'}
+							</Button>
+						</CardActions>
+
+						<Collapse in={expanded} timeout="auto" unmountOnExit>
+							<CardContent>
+								<Typography paragraph>{person.description}</Typography>
+							</CardContent>
+						</Collapse>
+					</Card>
+				</Grid>
+			</Grid>
+		</Container>
 	);
 }
 
